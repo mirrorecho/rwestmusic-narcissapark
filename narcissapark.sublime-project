@@ -12,6 +12,9 @@
 		},
 		{
 			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-drops-of-neon"
+		},
+		{
+			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-tokei"
 		}
 	],
 	"virtualenv": "/Users/randallwest/Code/venvs/abjad_2.16"
