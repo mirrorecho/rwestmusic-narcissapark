@@ -1,0 +1,18 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		},
+		{
+			"path": "/Users/randallwest/Code/mirrorecho/calliope"
+		},
+		{
+			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-follies"
+		},
+		{
+			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-drops-of-neon"
+		}
+	],
+	"virtualenv": "/Users/randallwest/Code/venvs/abjad_2.16"
+}
