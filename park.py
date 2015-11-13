@@ -50,7 +50,7 @@ class SomeMusic1(Song):
     piano1 = Line("g1 g1 g1")
     piano2 = Line("g1 g1 g1")
     frump = LineLyrics("c2 d | e f | g a ", 
-        lyrics = "Oh my can't you see POOP?")
+        lyrics = "Oh my can't you see me?")
     vinkle = LineLyrics("b1 b1 b1",
         lyrics = "Yes I can!")
 

@@ -24,7 +24,7 @@
             a2
         }
     }
-        \addlyrics { Oh my can't you see POOP? Oh my can't you see POOP? Oh my can't you see POOP?  } 
+        \addlyrics { Oh my can't you see me? Oh my can't you see me? Oh my can't you see me?  } 
     \new Staff {
         \clef "bass"
         \set Staff.instrumentName = \markup { Vinkle }

@@ -12,7 +12,7 @@
             }
         }
     }
-    \new Lyrics \lyricsto "YO" \lyricmode { hello there my stink }
+    \new Lyrics \lyricsto "YO" \lyricmode { hello there my yo }
     
 
     \new Staff {

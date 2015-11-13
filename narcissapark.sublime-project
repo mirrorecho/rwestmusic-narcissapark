@@ -5,16 +5,16 @@
 			"path": "."
 		},
 		{
-			"path": "/Users/randallwest/Code/mirrorecho/calliope"
+			"path": "../calliope"
 		},
 		{
-			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-follies"
+			"path": "../rwestmusic-follies"
 		},
 		{
-			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-drops-of-neon"
+			"path": "../rwestmusic-drops-of-neon"
 		},
 		{
-			"path": "/Users/randallwest/Code/mirrorecho/rwestmusic-tokei"
+			"path": "../rwestmusic-tokei"
 		}
 	],
 	"virtualenv": "/Users/randallwest/Code/venvs/abjad_2.16"
