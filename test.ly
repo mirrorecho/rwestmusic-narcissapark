@@ -3,28 +3,36 @@
         \clef "bass"
         \set Staff.instrumentName = \markup { Frump }
         \set Staff.shortInstrumentName = \markup { F. }
-        {
-            c2
-            d2
-            e2
-            f2
-            g2
-            a2
-            c2
-            d2
-            e2
-            f2
-            g2
-            a2
-            c2
-            d2
-            e2
-            f2
-            g2
-            a2
+        \context Voice = "Frump" {
+            {
+                {
+                    c2
+                    d2
+                    e2
+                    f2
+
+                    g2
+                    a2
+                    c2
+                    d2
+                    e2
+                    f2
+                    g2
+                    a2
+                    c2
+                    d2
+                    e2
+                    f2
+                    g2
+                    a2
+                }
+            }
         }
+
     }
-        \addlyrics { Oh my can't you see me? Oh my can't you see me? Oh my can't you see me?  } 
+    \new Lyrics \lyricsto "Frump" \lyricmode  { Oh my can't you see me?  }       
+    \new Lyrics \lyricsto "Frump" \lyricmode  { Oh my can't you see me?  }       
+    
     \new Staff {
         \clef "bass"
         \set Staff.instrumentName = \markup { Vinkle }

@@ -8,6 +8,8 @@ class FrumpStaff(BubbleGridStaff):
     # not parameters.... WHY?
     instrument=instrumenttools.BaritoneVoice(instrument_name="Frump", short_instrument_name="F.")
     clef="bass"
+    commands=(
+        ("""addlyrics { Yo yo yo } """, "after"),)
 
 # class SomeMusic1(Bubble):
 #     class Meta:
@@ -24,10 +26,10 @@ class FrumpStaff(BubbleGridStaff):
 
 class SongScore(BubbleScore):
     piano = BubblePiano()
-    # frump_staff = FrumpStaff()
-    frump = BubbleStaff(instrument=instrumenttools.BaritoneVoice(instrument_name="Frump", short_instrument_name="F."), clef="bass")
+    frump_staff = FrumpStaff()
+    # frump = BubbleStaff(instrument=instrumenttools.BaritoneVoice(instrument_name="Frump", short_instrument_name="F."), clef="bass")
     vinkle = BubbleStaff(instrument=instrumenttools.BaritoneVoice(instrument_name="Vinkle", short_instrument_name="V."), clef="bass")
-    sequence = ("frump","vinkle","piano")
+    sequence = ("frump_staff","vinkle","piano")
 
 class Song(Bubble):
     piano1 = Placeholder()

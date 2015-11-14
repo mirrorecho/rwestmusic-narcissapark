@@ -14,7 +14,8 @@ c.append(c1)
 c.append(c2)
 command_one_voice = indicatortools.LilyPondCommand('oneVoice', 'after')
 attach(command_one_voice, c)
-v=Voice(name="Frump")
+# v=Voice(name="Frump")
+v = Container()
 
 v.append("e'1")
 v.append(c)
@@ -23,8 +24,8 @@ v.extend("d'2 d'2")
 s = Staff()
 s.append(v)
 
-# show(s)
-# print(format(s))
+show(s)
+print(format(s))
 
 
 # EXAMPLE OF ADDING LYRICS
@@ -37,7 +38,8 @@ v.extend("d'2 d'2")
 lyrics_command = indicatortools.LilyPondCommand("addlyrics { Yo is yo mama yo mama }", "after")
 attach(lyrics_command, v)
 s.append(v)
-show(s)
+
+# show(s)
 
 
 
