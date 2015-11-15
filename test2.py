@@ -6,16 +6,28 @@ class Ship1(object):
     yo_mama="!!!"
     yo_papa="???"
 
-    class Meta:
-        color="Blue"
-        number=1
+    def __init__(self, yo=None, **kwargs):
+        print("YO: ")
+        print(yo)
+        # print("ARGS: ")
+        # print(args)
+        print("KWARGS: ")
+        print(kwargs)
+        print("----------------------------------------------------")
 
 
 class Ship2(Ship1):
-    class Meta:
-        number=2
+    def __init__(self, **kwargs):
+        print(blah)
+        super().__init__(**kwargs)
 
 
-s = Ship2()
+s1 = Ship1("yo music here", bland="!")
 
-print(s.Meta.color)
+s2 = Ship2("yo music here", bland="!")
+
+
+
+
+
+
