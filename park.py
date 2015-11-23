@@ -1,143 +1,113 @@
 import _settings
 from abjad import *
 from calliope.bubbles import *
+from lyrics import FRUMP_LYRICS, VINKLE_LYRICS
+from base import *
 
-class FrumpStaff(BubbleGridStaff):
-    frump = BubbleVoice(name="Frump")
-    # for reasons that are not entirely clear, instrument and clef need to be set as attributes,
-    # not parameters.... WHY?
-    instrument=instrumenttools.BaritoneVoice(instrument_name="Frump", short_instrument_name="F.")
-    clef="bass"
-    commands=(
-        ("""addlyrics { Yo yo yo } """, "after"),)
-
-# class SomeMusic1(Bubble):
-#     class Meta:
-#         sequence = ("one", "two", "three")
-
-# class SomeMusic2(Bubble):
-#     class Meta:
-#         sequence = ("one", "two", "three")
-
-# class SomeMusic3(Bubble):
-#     def violin_1(self, *args, **kwargs):
-#         return Line("R1")
+# ------------------------------------------------------------------------------------------
+# NOTES FOR BUBBLES DEVELOPMENT
+# - short-cut for BubbleMaterial class
+# - short-cut for Line class?
+# - put bubbles short-cuts in optional import
+# - a bubble type that sets bubble attributes automatically from material names in dictionary
+# - separating out pitch and rhythm in the material
+# - start a bubble (in particular a line) on a particular pitch
+# - better lyrics handling!
+# - overlaying mutations on lines (and by extenion larger bubbles)
+# - font for title, composer, etc.
+# - bar numbers
 
 
-class SongScore(BubbleScore):
-    piano = BubblePiano()
-    # frump_staff = FrumpStaff()
-    frump = BubbleStaff(
-            instrument=instrumenttools.BaritoneVoice(instrument_name="Frump", short_instrument_name="F."), 
-            clef="bass",
-            commands=(
-                # ("""addlyrics { 
-                    
-                #     What a lark
-                #     Fun and games from dawn past dark
-                #     Huge projections
-                #     Huge reflections
-                #     Astroturf in all directions
+# ------------------------------------------------------------------------------------------
+# SOME MATERIAL
 
-                #     Musak bland but very loud (loud boring chords here)
-                #     It’s sure to draw a raucous crowd
-                #     Andrew Weber, Philip Glass
-                #     No one will even miss the grass
-
-                #     Lights that flash and search the sky
-                #     Drones o’re head will dive and fly
-                #     Never mind old Burnham’s promise
-                #     Forget the war and the Islamists
-
-                #     Come and play 
-                #     Ev-er-y night and day
-                #     At our Narcissapark!
-                    
-                # } """, "after"),
-                )
-            )
-    vinkle = BubbleStaff(instrument=instrumenttools.BaritoneVoice(instrument_name="Vinkle", short_instrument_name="V."), clef="bass")
-    # sequence = ("frump_staff","vinkle","piano")
-    sequence = ("frump","vinkle","piano")
-
-class Song(Bubble):
-    piano1 = Placeholder()
-    piano2 = Placeholder()
-    frump = Placeholder()
-    vinkle = Placeholder()
-
-class SongStart(Song):
-    piano1 = Line( commands=( ("time 3/4", "before"), ) )
-    piano2 = Line( commands=( ("time 3/4", "before"), ) )
-    frump = Line( commands=( ("time 3/4", "before"), ) )
-    vinkle = Line( commands=( ("time 3/4", "before"), ) )
-
-
-class RestPhrase(Line):
-    music = "R2. R2. R2. R2.     R2. R2. R2. R2."
-
-class SongPhrase(Song):
-    piano1 = RestPhrase()
-    piano2 = RestPhrase()
-    frump = RestPhrase()
-    vinkle = RestPhrase()
-
-piano_lick1 = Line("r4 <c' e' g'>4 <c' e' g'>4 | r4 <c' e' g'>8 <c' e' g'>8 <c' e' g'>4 | ")
-piano_hanker = Line("<g' c''>4 <g' c''>4 <g' c''>4")
+piano_hanker = Line("<g' c''>4")*3
+piano1_every = Line("<c' c''>4")*3
+piano2_every = Line("<af, ef af>4")*3
 
 class PianoWalkUp(SongPhrase):
-    piano1 = piano_lick1 + piano_lick1 + piano_hanker + piano_hanker + piano_hanker + piano_hanker
-    piano2 = Line("c4 r4 r4 | g,4 r4 r4 | c4 r4 r4 | d4 r4 r4 |     a,4 r4 b,4 | e4 r4 b,4 | fs4 c4 fs4 | gs4 bs4 ds4  ")
+    piano1 = BubbleMaterial("park.piano.lick1")*2 + piano_hanker*4
+    piano2 = BubbleMaterial("park.piano.bass_walkup")
 
+
+# ------------------------------------------------------------------------------------------
+# INTRO
+
+
+# ------------------------------------------------------------------------------------------
+# CHORUS
+class PlayPhrase(SongPhrase):
+    frump = BubbleMaterial("park.chorus.play.frump")
+    vinkle = BubbleMaterial("park.chorus.play.vinkle")
+    piano1 = piano1_every* 4 + Tr(piano1_every*4, 2)
+    piano2 = piano2_every* 4 + Tr(piano2_every*4, 2)
+
+class NightDayPhrase(SongPhrase):
+    frump = BubbleMaterial("park.chorus.night_day.frump")
+    piano1 = Tr(piano1_every*3, 2) + Tr(piano1_every*3, 4) + Tr(piano1_every*2, 7)
+    piano2 = Tr(piano2_every*3, 2) + Tr(piano2_every*3, 4) + Line("<g, c e>4")*3 + Line("<g, b, d>4")*3
+
+class NarcissaPhrase(SongPhrase):
+    frump = BubbleMaterial("park.chorus.narcissa.frump")
+    piano2 = Tr(piano2_every, -1)*2 + Line("<g, c e>4")*3 + Tr(piano2_every, -1) + Tr(piano2_every*4, 4)
+
+class Chorus(GridSequence, Song):
+    grid_sequence = (PlayPhrase, NightDayPhrase, NarcissaPhrase)
+
+# ------------------------------------------------------------------------------------------
+# VERSE 1
 class LarkPhrase(PianoWalkUp):
-    frump = Line("g2 e4 | c4 r4 r4 | e2 g4 | d2 g4 | g2 g4 | g4 r4 r4 | R2. | R2.")
+    frump = BubbleMaterial("park.verse1.frump_lark")
 
 class HugePhrase(SongPhrase):
-    vinkle = Line("af2 f4 | df4 df4 r4 | f2 af4 | ef4 ef2 | R2. | R2. | R2. | R2. ")
-    piano1 = Transpose(PianoWalkUp.piano1, transpose_expr=1)
-    piano2 = Transpose(PianoWalkUp.piano2, transpose_expr=1)
+    vinkle = BubbleMaterial("park.verse1.vinkle_huge")
+    piano1 = Tr(PianoWalkUp.piano1, 1)
+    piano2 = Tr(PianoWalkUp.piano2, 1)
 
-class AstroturfPhrase(SongPhrase):
-    frump = Line("a2 fs4 | d4 r4 e4 | e2 a4 | a4 a2 | R2. | R2. | R2. | R2.")
-    piano1 = Transpose(PianoWalkUp.piano1, transpose_expr=2)
-    piano2 = Transpose(PianoWalkUp.piano2, transpose_expr=2)
+class AstroPhrase(SongPhrase):
+    frump = BubbleMaterial("park.verse1.frump_astro")
+    piano1 = Tr(PianoWalkUp.piano1, 2)
+    piano2 = Tr(PianoWalkUp.piano2, 2)
 
-# class SomeMusic1(Song):
-#     # piano1 = PolyLine("a'1 a'1", "g'2 g'2 g'2 g'2", "b2. b4 b1")
-#     piano1 = Line("g1 g1 g1")
-#     piano2 = Line("g1 g1 g1")
-#     frump = LineLyrics("c2 d | e f | g a ", 
-#         lyrics = "Oh my can't you see me?")
-#     vinkle = LineLyrics("b1 b1 b1",
-#         lyrics = "Yes I can!")
+class Verse1(GridSequence, Song):
+    grid_sequence = (LarkPhrase, HugePhrase, AstroPhrase)
 
-# class SomePianoStuff(Line):
-#     music = Sequence( SomeMusic.piano1, SomeMusic.piano2 )
-    # # OR:
-    # music = SomeMusic.piano1 + SomeMusic.piano2
 
-# class SomeMusic2(SomeMusic1):
-#     pass
-    # frump = SomeMusic.frump.change_lyrics("Oh my can't you see me?")
+# ------------------------------------------------------------------------------------------
+# VERSE 2
+
+class MusakPhrase(LarkPhrase):
+    pass
+
+class AndrewPhrase(HugePhrase):
+    pass
+
+class GrassPhrase(AstroPhrase):
+    pass
+
+class Verse2(GridSequence, Song):
+    grid_sequence = (MusakPhrase, AndrewPhrase, GrassPhrase)
+
+# ------------------------------------------------------------------------------------------
+# VERSE 3
+
+# ------------------------------------------------------------------------------------------
+# CODA?
+
+# ------------------------------------------------------------------------------------------
+# FINAL SCORE
 
 class SongMusic(GridSequence, Song):
-    grid_sequence = (SongStart, LarkPhrase, HugePhrase, AstroturfPhrase )
-
-# class Lick1(Song):
-#     piano1 = Line("r1\\fermata")
-#     piano2 = Line("b1\\fermata")
-#     frump = Line("a4 a a a")
-#     voice2 = Line("b4 b b b")
-
-# class ParkMusic(GridSequence, Song):
-#     grid_sequence = ( Lick1, Lick1 )
-
-# FrumpStaff().make_pdf()
-
-# print( FrumpStaff() )
+    grid_sequence = (SongStart, 
+        # Intro,
+        Verse1, 
+        Chorus,
+        # Verse2, 
+        # Verse3,
+        # Chorus
+        )
 
 score = SongScore( SongMusic() )
-print(score)
 score.make_pdf()
 # print(score)
 # score.show()

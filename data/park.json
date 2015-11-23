@@ -1,0 +1,31 @@
+{
+
+    "rest_phrase": "R2. R2. R2. R2.     R2. R2. R2. R2.",
+
+    "piano": {
+        "lick1": "r4 <c' e' g'>4 <c' e' g'>4 | r4 <c' e' g'>8 <c' e' g'>8 <c' e' g'>4 | ",
+        "bass_walkup": "c4 r4 r4 | g,4 r4 r4 | c4 r4 r4 | d4 r4 r4 |     a,4 r4 b,4 | e4 r4 b,4 | fs4 c4 fs4 | gs4 bs4 ds4"
+    },
+
+    "chorus": {
+        "play": {
+            "frump":    "R2.   | c2 c4 | ef2. ~ |  ef2. |        R2. |  r4 bf,4 bf,4   | bf,2. ~   | bf,2.     | ",
+            "vinkle":   "R2.   | c2 c4 | c2. ~  |  c2.  |        R2. |  r4 d4 d4       | f2. ~     | f2.       | "
+        },
+        "night_day": {
+            "frump":   "R2. | d4 d4 d4 | f2 f4 | e4 e4 e4 |         g2. ~ | g2. | R2. | r4 r4 d4 |",
+            "vinkle":  ""
+        },
+        "narcissa": {
+            "frump":   "R2. | d4 d4 d4 | f2 f4 | e4 e4 e4 |         g2. ~ | g2. | R2. | r4 r4 d4 |",
+            "vinkle":  "f2. |  f2. |  e2. |  g2. |                   c'2. |  R2. |  R2. |  R2. | "
+        }
+    },
+    "verse1": {
+        "frump_lark":"g2 e4 | c4 r4 r4 | e2 g4 | d2 g4 | g2 g4 | g4 r4 r4 | R2. | R2.",
+        "vinkle_huge":"af2 f4 | df4 df4 r4 | f2 af4 | ef4 ef2 | R2. | R2. | R2. | R2.",
+        "frump_astro":"a2 fs4 | d4 r4 e4 | e2 a4 | a4 a2 | R2. | R2. | R2. | R2."
+    }
+
+
+}
