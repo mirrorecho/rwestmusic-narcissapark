@@ -11,13 +11,13 @@ class SongScore(BubbleScore):
     frump = BubbleStaff(
             instrument=instrumenttools.BaritoneVoice(instrument_name="Frump", short_instrument_name="F."), clef="bass",
             commands=(
-                ("addlyrics {" + FRUMP_LYRICS["verse1"] + FRUMP_LYRICS["chorus"] + "} ", "after"),
+                ("addlyrics {" + FRUMP_LYRICS["verse1"] + FRUMP_LYRICS["chorus"] + FRUMP_LYRICS["verse2"] + "} ", "after"),
                 )
             )
     vinkle = BubbleStaff(
             instrument=instrumenttools.BaritoneVoice(instrument_name="Vinkle", short_instrument_name="V."), clef="bass",
             commands=(
-                ("addlyrics {" + FRUMP_LYRICS["verse1"] + VINKLE_LYRICS["chorus"] + "} ", "after"),
+                ("addlyrics {" + VINKLE_LYRICS["verse1"] + VINKLE_LYRICS["chorus"] + VINKLE_LYRICS["verse2"] + "} ", "after"),
                 )
             )
     sequence = ("frump","vinkle","piano")

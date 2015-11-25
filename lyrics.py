@@ -4,20 +4,20 @@ FRUMP_LYRICS = {
     "chorus": """
         Come and play 
         Come and play 
-        Ev- er- y night and Ev- er- y  day
-        At our Nar- ciss- a park!
+        Ev -- er -- y night and Ev -- er -- y  day
+        At our Nar -- ciss -- a park!
     """,
 
     "verse1": """ 
         What a lark
         Fun and games from dawn past dark
 
-        Astroturf in all directions        
+        As -- tro -- turf in all di -- rec -- tions        
     """,
 
     "verse2": """
-        Musak bland but very loud (loud boring chords here)
-        It’s sure to draw a raucous crowd
+        Mu -- sak bland but ver -- y loud (loud boring chords here)
+        It’s sure to draw a rau -- cous crowd
 
         No one will even miss the grass
     """,
@@ -31,16 +31,16 @@ VINKLE_LYRICS =  {
     "chorus": FRUMP_LYRICS["chorus"],
 
     "verse1": """ 
-        Huge projections
-        Huge reflections
+        Huge pro -- jec -- tions
+        Huge re -- flec -- tions
     """,
     "verse2": """
-        Andrew Weber, Philip Glass
+        And -- rew Loyd Weber, Phil -- ip Glass
     """,
     "verse3":"""
         Lights that flash and search the sky
 
-        Never mind old Burnham’s promise
-        Forget the war and the Islamists
+        Nev -- er mind old Burn -- ham’s promise
+        For -- get the war and the Is -- lam -- ists
     """
 }
