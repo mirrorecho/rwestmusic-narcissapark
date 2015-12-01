@@ -26,7 +26,7 @@ piano1_every = Line("<c' c''>4")*3
 piano2_every = Line("<af, ef af>4")*3
 
 class PianoWalkUp(SongPhrase):
-    piano1 = BubbleMaterial("park.piano.lick1")*2 + piano_hanker*4
+    piano1 = BubbleMaterial("park.piano.lick1")*2 + BubbleMaterial("park.piano.hanker")
     piano2 = BubbleMaterial("park.piano.bass_walkup")
 
 
@@ -44,11 +44,13 @@ class PlayPhrase(SongPhrase):
 
 class NightDayPhrase(SongPhrase):
     frump = BubbleMaterial("park.chorus.night_day.frump")
+    vinkle = frump
     piano1 = Tr(piano1_every*3, 2) + Tr(piano1_every*3, 4) + Tr(piano1_every*2, 7)
     piano2 = Tr(piano2_every*3, 2) + Tr(piano2_every*3, 4) + Line("<g, c e>4")*3 + Line("<g, b, d>4")*3
 
 class NarcissaPhrase(SongPhrase):
     frump = BubbleMaterial("park.chorus.narcissa.frump")
+    vinkle = frump
     piano2 = Tr(piano2_every, -1)*2 + Line("<g, c e>4")*3 + Tr(piano2_every, -1) + Tr(piano2_every*4, 4)
 
 class Chorus(GridSequence, Song):
@@ -90,6 +92,17 @@ class Verse2(GridSequence, Song):
 
 # ------------------------------------------------------------------------------------------
 # VERSE 3
+class LightsPhrase(LarkPhrase):
+    pass
+
+class DronePhrase(HugePhrase):
+    pass
+
+class BurnhamPhrase(AstroPhrase):
+    pass
+
+class Verse3(GridSequence, Song):
+    grid_sequence = (LightsPhrase, DronePhrase, BurnhamPhrase)
 
 # ------------------------------------------------------------------------------------------
 # CODA?

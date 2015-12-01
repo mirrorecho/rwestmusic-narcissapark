@@ -15,8 +15,9 @@ FRUMP_LYRICS = {
         As -- tro -- turf in all di -- rec -- tions        
     """,
 
+    #(loud boring chords after first line)
     "verse2": """
-        Mu -- sak bland but ver -- y loud (loud boring chords here)
+        Mu -- sak bland but ver -- y loud
         It’s sure to draw a rau -- cous crowd
 
         No one will even miss the grass
