@@ -95,14 +95,14 @@ class Verse2(GridSequence, Song):
 class LightsPhrase(LarkPhrase):
     pass
 
-class DronePhrase(HugePhrase):
+class DronesPhrase(HugePhrase):
     pass
 
 class BurnhamPhrase(AstroPhrase):
     pass
 
 class Verse3(GridSequence, Song):
-    grid_sequence = (LightsPhrase, DronePhrase, BurnhamPhrase)
+    grid_sequence = (LightsPhrase, DronesPhrase, BurnhamPhrase)
 
 # ------------------------------------------------------------------------------------------
 # CODA?
