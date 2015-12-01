@@ -79,13 +79,13 @@ class Verse1(GridSequence, Song):
 # VERSE 2
 
 class MusakPhrase(LarkPhrase):
-    pass
+    frump = BubbleMaterial("park.verse2.frump_musak")
 
 class AndrewPhrase(HugePhrase):
-    pass
+    vinkle = BubbleMaterial("park.verse2.vinkle_andrew")
 
 class GrassPhrase(AstroPhrase):
-    pass
+    frump = BubbleMaterial("park.verse2.frump_grass")
 
 class Verse2(GridSequence, Song):
     grid_sequence = (MusakPhrase, AndrewPhrase, GrassPhrase)
@@ -115,7 +115,7 @@ class SongMusic(GridSequence, Song):
         # Intro,
         Verse1, 
         Chorus,
-        # Verse2, 
+        Verse2, 
         # Verse3,
         # Chorus
         )

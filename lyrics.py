@@ -20,7 +20,7 @@ FRUMP_LYRICS = {
         Mu -- sak bland but ver -- y loud
         It’s sure to draw a rau -- cous crowd
 
-        No one will even miss the grass
+        No one will e -- ven miss the grass
     """,
 
     "verse3":"""
@@ -36,7 +36,7 @@ VINKLE_LYRICS =  {
         Huge re -- flec -- tions
     """,
     "verse2": """
-        And -- rew Loyd Weber, Phil -- ip Glass
+        And -- rew Loyd We -- ber, Phil -- ip Glass
     """,
     "verse3":"""
         Lights that flash and search the sky

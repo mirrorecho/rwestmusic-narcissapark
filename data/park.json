@@ -26,6 +26,11 @@
         "frump_lark":"g2 e4 | c4 r4 r4 | e2 g4 | d2 g4 | g2 g4 | g4 r4 r4 | R2. | R2.",
         "vinkle_huge":"af2 f4 | df4 df4 r4 | f2 af4 | ef4 ef2 | R2. | R2. | R2. | R2.",
         "frump_astro":"a2 fs4 | d4 r4 e4 | e2 a4 | a4 a2 | R2. | R2. | R2. | R2."
+    },
+    "verse2": {
+        "frump_musak":"g2 e4 | c4 r4 c4 | c2 c4 | g2 g4 | g2 g4 | g2 g4 | fs2 fs4 | fs2.",
+        "vinkle_andrew":"af4 f4 df4 | df4 df4 r4 | f2 af4 | ef2. | R2. | R2. | R2. | R2.",
+        "frump_grass":"a4 fs4 d4 | e2 e4 | e2 e4 | a2. | R2. | R2. | R2. | R2."
     }
 
 
