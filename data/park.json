@@ -31,7 +31,11 @@
         "frump_musak":"g2 e4 | c4 r4 c4 | c2 c4 | g2 g4 | g2 g4 | g2 g4 | fs2 fs4 | fs2.",
         "vinkle_andrew":"af4 f4 df4 | df4 df4 r4 | f2 af4 | ef2. | R2. | R2. | R2. | R2.",
         "frump_grass":"a4 fs4 d4 | e2 e4 | e2 e4 | a2. | R2. | R2. | R2. | R2."
+    },
+    "verse3": {
+        "vinkle_lights":"ef2 ef4 | gf4 r4 gf4 | ef4 r4 ef4 | gf2. | R2. | R2. | R2. | R2. | ",
+        "frump_drones":"fs4 fs4 fs4 | fs2 fs4 | e4 r4 e4 | g2. | R2. | R2. | R2. | R2.",
+        "vinkle_burnham":"g8 g g4 g4 | g2 g4 | g4 g4 r4 | r4 r4 g |     g4 g4 g4 | g4 g4 g4 | g4 g4 r4 | R2. | "
     }
-
 
 }

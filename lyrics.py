@@ -24,7 +24,7 @@ FRUMP_LYRICS = {
     """,
 
     "verse3":"""
-        Drones o’re head will dive and fly
+        Drones o -- ver head will dive and fly
     """
 }
 
@@ -41,7 +41,7 @@ VINKLE_LYRICS =  {
     "verse3":"""
         Lights that flash and search the sky
 
-        Nev -- er mind old Burn -- ham’s promise
+        Nev -- er mind old Burn -- ham’s pro -- mise
         For -- get the war and the Is -- lam -- ists
     """
 }

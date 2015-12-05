@@ -29,11 +29,6 @@ class PianoWalkUp(SongPhrase):
     piano1 = BubbleMaterial("park.piano.lick1")*2 + BubbleMaterial("park.piano.hanker")
     piano2 = BubbleMaterial("park.piano.bass_walkup")
 
-
-# ------------------------------------------------------------------------------------------
-# INTRO
-
-
 # ------------------------------------------------------------------------------------------
 # CHORUS
 class PlayPhrase(SongPhrase):
@@ -55,6 +50,12 @@ class NarcissaPhrase(SongPhrase):
 
 class Chorus(GridSequence, Song):
     grid_sequence = (PlayPhrase, NightDayPhrase, NarcissaPhrase)
+
+# ------------------------------------------------------------------------------------------
+# INTRO
+class Intro(Chorus):
+    frump = rest_phrase * 3
+    vinkle = rest_phrase * 3
 
 # ------------------------------------------------------------------------------------------
 # VERSE 1
@@ -93,13 +94,16 @@ class Verse2(GridSequence, Song):
 # ------------------------------------------------------------------------------------------
 # VERSE 3
 class LightsPhrase(LarkPhrase):
-    pass
+    vinkle = BubbleMaterial("park.verse3.vinkle_lights")
+    frump = rest_phrase
 
 class DronesPhrase(HugePhrase):
-    pass
+    frump = BubbleMaterial("park.verse3.frump_drones")
+    vinkle = rest_phrase
 
 class BurnhamPhrase(AstroPhrase):
-    pass
+    vinkle = BubbleMaterial("park.verse3.vinkle_burnham")
+    frump = rest_phrase
 
 class Verse3(GridSequence, Song):
     grid_sequence = (LightsPhrase, DronesPhrase, BurnhamPhrase)
@@ -112,12 +116,12 @@ class Verse3(GridSequence, Song):
 
 class SongMusic(GridSequence, Song):
     grid_sequence = (SongStart, 
-        # Intro,
+        Intro,
         Verse1, 
         Chorus,
         Verse2, 
-        # Verse3,
-        # Chorus
+        Verse3,
+        Chorus
         )
 
 score = SongScore( SongMusic() )

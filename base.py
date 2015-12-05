@@ -11,13 +11,13 @@ class SongScore(BubbleScore):
     frump = BubbleStaff(
             instrument=instrumenttools.BaritoneVoice(instrument_name="Frump", short_instrument_name="F."), clef="bass",
             commands=(
-                ("addlyrics {" + FRUMP_LYRICS["verse1"] + FRUMP_LYRICS["chorus"] + FRUMP_LYRICS["verse2"] + "} ", "after"),
+                ("addlyrics {" + FRUMP_LYRICS["verse1"] + FRUMP_LYRICS["chorus"] + FRUMP_LYRICS["verse2"] + FRUMP_LYRICS["verse3"] + FRUMP_LYRICS["chorus"] + "} ", "after"),
                 )
             )
     vinkle = BubbleStaff(
             instrument=instrumenttools.BaritoneVoice(instrument_name="Vinkle", short_instrument_name="V."), clef="bass",
             commands=(
-                ("addlyrics {" + VINKLE_LYRICS["verse1"] + VINKLE_LYRICS["chorus"] + VINKLE_LYRICS["verse2"] + "} ", "after"),
+                ("addlyrics {" + VINKLE_LYRICS["verse1"] + VINKLE_LYRICS["chorus"] + VINKLE_LYRICS["verse2"] + VINKLE_LYRICS["verse3"] + VINKLE_LYRICS["chorus"] + "} ", "after"),
                 )
             )
     sequence = ("frump","vinkle","piano")
@@ -34,8 +34,11 @@ class SongStart(Song):
     frump = Line( commands=( ("time 3/4", "before"), ) )
     vinkle = Line( commands=( ("time 3/4", "before"), ) )
 
+rest_phrase = BubbleMaterial("park.rest_phrase")
+
 class SongPhrase(Song):
-    piano1 = BubbleMaterial("park.rest_phrase")
-    piano2 = BubbleMaterial("park.rest_phrase")
-    frump = BubbleMaterial("park.rest_phrase")
-    vinkle = BubbleMaterial("park.rest_phrase")
+    piano1 = rest_phrase
+    piano2 = rest_phrase
+    frump = rest_phrase
+    vinkle = rest_phrase
+
