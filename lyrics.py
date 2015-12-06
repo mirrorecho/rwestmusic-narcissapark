@@ -5,6 +5,7 @@ FRUMP_LYRICS = {
         Come and play 
         Come and play 
         Ev -- er -- y night and Ev -- er -- y  day
+        At our Nar -- ciss -- a park
         At our Nar -- ciss -- a park!
     """,
 

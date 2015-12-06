@@ -1,3 +1,6 @@
+yoHan = { c2 }
+
+
 \new Score <<
     \new Staff {
         \clef "bass"

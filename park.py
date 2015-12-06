@@ -25,31 +25,59 @@ piano_hanker = Line("<g' c''>4")*3
 piano1_every = Line("<c' c''>4")*3
 piano2_every = Line("<af, ef af>4")*3
 
-class PianoWalkUp(SongPhrase):
-    piano1 = BubbleMaterial("park.piano.lick1")*2 + BubbleMaterial("park.piano.hanker")
-    piano2 = BubbleMaterial("park.piano.bass_walkup")
+piano1_chord = Line("<c ef af>2.")
+piano1_big_chord = Line("<c, e g c>2.")
+
+class PianoDown2(MultiLine):
+    voice1 = piano1_chord
+    voice2 = Line("<af,, af,>2. ~ <af,, af,>2. ~ <af,, af,>2. ~ <af,, af,>2.")
+
+class PianoDown2Short(MultiLine):
+    voice1 = piano1_chord
+    voice2 = Line("<af,, af,>2. ~ <af,, af,>2.")
+
+piano_down1 = Line("s2.") + Tr(piano1_chord, 12) + Tr(piano1_chord, 24) + Tr(piano1_chord, 36) 
+piano_down1_short = Line("s2.") + Tr(piano1_chord, 12)
+
+def piano_up4(music):
+    return music + Tr(music, 12) + Tr(music, 24) + Tr(music, 36)
+
 
 # ------------------------------------------------------------------------------------------
 # CHORUS
 class PlayPhrase(SongPhrase):
     frump = BubbleMaterial("park.chorus.play.frump")
     vinkle = BubbleMaterial("park.chorus.play.vinkle")
-    piano1 = piano1_every* 4 + Tr(piano1_every*4, 2)
-    piano2 = piano2_every* 4 + Tr(piano2_every*4, 2)
+    piano1 = (piano_down1 + Tr(piano_down1, 2)).latch(dynamic="p")
+    piano2 = PianoDown2() + Tr(PianoDown2(), 2)
 
 class NightDayPhrase(SongPhrase):
     frump = BubbleMaterial("park.chorus.night_day.frump")
-    vinkle = frump
-    piano1 = Tr(piano1_every*3, 2) + Tr(piano1_every*3, 4) + Tr(piano1_every*2, 7)
-    piano2 = Tr(piano2_every*3, 2) + Tr(piano2_every*3, 4) + Line("<g, c e>4")*3 + Line("<g, b, d>4")*3
+    vinkle = BubbleMaterial("park.chorus.night_day.vinkle")
+    piano1 = (piano_down1 + Tr(piano_down1_short, 2) + Tr(piano_down1_short, 4)).latch(dynamic="mp")
+    piano2 = PianoDown2() + Tr(PianoDown2Short(), 2) + Tr(PianoDown2Short(), 4)
 
 class NarcissaPhrase(SongPhrase):
     frump = BubbleMaterial("park.chorus.narcissa.frump")
-    vinkle = frump
-    piano2 = Tr(piano2_every, -1)*2 + Line("<g, c e>4")*3 + Tr(piano2_every, -1) + Tr(piano2_every*4, 4)
+    vinkle = BubbleMaterial("park.chorus.narcissa.vinkle")
+    piano1 = Tr(piano_down1, 4) + Line("<d' g' b'>2. <d'' g'' b''>2. <d' fs' a'>2. <d'' fs'' a''>2.")
+    piano2 = Tr(PianoDown2(), 4) + Line("<d, d>2.-> <d, d>2.-> <d, d>2.-> <d, d>2.->")
+
+class NarcissaPhrase2(SongPhrase):
+    frump = BubbleMaterial("park.chorus.narcissa2.frump")
+    vinkle = BubbleMaterial("park.chorus.narcissa2.vinkle")
+    piano1 = Line("""<e' g' b' e''>2.-> <e'' g'' b'' e'''>2.->
+            <f' a' c'' f''>2.-> <f'' a'' c''' f'''>2.->
+            <g' c'' e''>2.-> <g'' b'' d''' g'''>2.->
+            <c''' e''' g''' c''''>2.-> ~ <c''' e''' g''' c''''>2.
+            """)
+    piano2 = Line("""<e, e>2.-> <e, e>2.-> 
+            <f, f>2.-> <f, f>2.->
+            <g, g>2.-> <g, g>2.->
+            <c, c>2.-> ~ <c, c>2.""")
 
 class Chorus(GridSequence, Song):
-    grid_sequence = (PlayPhrase, NightDayPhrase, NarcissaPhrase)
+    grid_sequence = (PlayPhrase, NightDayPhrase, NarcissaPhrase, NarcissaPhrase2)
 
 # ------------------------------------------------------------------------------------------
 # INTRO
@@ -59,13 +87,18 @@ class Intro(Chorus):
 
 # ------------------------------------------------------------------------------------------
 # VERSE 1
+
+class PianoWalkUp(SongPhrase):
+    piano1 = BubbleMaterial("park.piano.lick_a") + BubbleMaterial("park.piano.lick_b")
+    piano2 = BubbleMaterial("park.piano.bass_walkup_a") + BubbleMaterial("park.piano.bass_walkup_b")
+
 class LarkPhrase(PianoWalkUp):
     frump = BubbleMaterial("park.verse1.frump_lark")
 
 class HugePhrase(SongPhrase):
     vinkle = BubbleMaterial("park.verse1.vinkle_huge")
-    piano1 = Tr(PianoWalkUp.piano1, 1)
-    piano2 = Tr(PianoWalkUp.piano2, 1)
+    piano1 = Tr(BubbleMaterial("park.piano.lick_a"), 1) + BubbleMaterial("park.piano.lick_b2")
+    piano2 = Tr(BubbleMaterial("park.piano.bass_walkup_a"), 1) + BubbleMaterial("park.piano.bass_walkup_b2")
 
 class AstroPhrase(SongPhrase):
     frump = BubbleMaterial("park.verse1.frump_astro")
@@ -116,12 +149,12 @@ class Verse3(GridSequence, Song):
 
 class SongMusic(GridSequence, Song):
     grid_sequence = (SongStart, 
-        Intro,
+        # Intro,
         Verse1, 
-        Chorus,
-        Verse2, 
-        Verse3,
-        Chorus
+        # Chorus,
+        # Verse2, 
+        # Verse3,
+        # Chorus
         )
 
 score = SongScore( SongMusic() )
