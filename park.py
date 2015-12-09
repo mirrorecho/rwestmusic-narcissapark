@@ -100,10 +100,17 @@ class HugePhrase(SongPhrase):
     piano1 = Tr(BubbleMaterial("park.piano.lick_a"), 1) + BubbleMaterial("park.piano.lick_b2")
     piano2 = Tr(BubbleMaterial("park.piano.bass_walkup_a"), 1) + BubbleMaterial("park.piano.bass_walkup_b2")
 
+class PianoLickA3(Line): 
+    music = BubbleMaterial("park.piano.lick_a3")
+    def after_music(self, music, **kwargs):
+        super().after_music(music, **kwargs)
+        arpeggio = indicatortools.Arpeggio()
+        attach(arpeggio, music[0])
+
 class AstroPhrase(SongPhrase):
     frump = BubbleMaterial("park.verse1.frump_astro")
-    piano1 = Tr(PianoWalkUp.piano1, 2)
-    piano2 = Tr(PianoWalkUp.piano2, 2)
+    piano1 = PianoLickA3() + Tr(BubbleMaterial("park.piano.lick_b"), -5)
+    piano2 = BubbleMaterial("park.piano.bass_walkup_a3")+ Tr(BubbleMaterial("park.piano.bass_walkup_b"), -5)
 
 class Verse1(GridSequence, Song):
     grid_sequence = (LarkPhrase, HugePhrase, AstroPhrase)
@@ -151,8 +158,9 @@ class SongMusic(GridSequence, Song):
     grid_sequence = (SongStart, 
         # Intro,
         Verse1, 
-        # Chorus,
-        # Verse2, 
+        Chorus,
+        Verse2, 
+        Chorus,
         # Verse3,
         # Chorus
         )

@@ -6,11 +6,14 @@
     "lick_a": "         r4 <e' g' c''> <e' g' c''> | r4 <e' g' c''>8 <e' g' c''>8 <e' g' c''>4 | r4 <d' g' d''>4 <d' g' d''>4 | r4 <e' g' c''>4 <e' g' c''>4",
     "bass_walkup_a": "  <c g>2( e4) | <g, c>4-. r4 r4 | b,4( d g) |  <c e>2( g4) | ",
     
-    "bass_walkup_b": "<d fs a>4-. r r | <fs b>( e b,) | <gf, gf>2.-> | <af,, e, a,>->",
-    "lick_b": "r4 <d' a' d''>8 <d' a' d''>8 <d' a' d''>4 | e'8( gs' b' e'' gs'' b'') | r4 <c'' gf'' af''> <c'' gf'' af''> |  r4 <af c' ef' gf'> <af c' ef' gf'>",
+    "lick_b": "r4 <d' a' d''>8 <d' a' d''>8 <d' a' d''>4 | e'8( gs' b' e'' gs''4) | r4 <c'' gf'' af''> <c'' gf'' af''> |  r4 <af c' ef' gf'> <af c' ef' gf'>",
+    "bass_walkup_b": "<d fs a>4-. r r | <fs b>( e b,) | <gf, gf>2.-> | <af,, ef, af,>->",
     
-    "lick_b": "r4 <d' a' d''>8 <d' a' d''>8 <d' a' d''>4 | e'8( gs' b' e'' gs'' b'') | r4 <c'' gf'' af''> <c'' gf'' af''> |  r4 <af c' ef' gf'> <af c' ef' gf'>",
-    "bass_walkup_2": "<d fs a>4-. r r | <fs b>( e b,) | <gf, gf>2.-> | <af,, e, a,>->",
+    "lick_b2": " ef''4(  c'' <g' bf'> | ds'2 cs'4 |  \\clef bass <e b>4  <d fs>) <cs e g a> ~ | <cs e g a>2. ",
+    "bass_walkup_b2": "c'4( af df ~ | df b, e, ~ | e, a, e,) |  <a,,, a,,>2.->",
+
+    "lick_a3": " \\clef treble <d'' fs'' a'' d'''>4( <d'' a''>2) | fs'8( a' d'' fs'') <cs'' a''>4-- | r4 <cs'' a''>8 <cs'' a''>8 <cs'' a''>4 | a''8( fs'' cs'' a' fs'4) ",
+    "bass_walkup_a3": "  a2( fs4) | <a, d>-. <a, d>-. <a, e>-.  | <a, e>-. r r | <fs a>-. <fs a>-. <fs a>-. | ",
 
     "hanker": "<d' c''>4 <d' c''>4 <d' c''>4 | <g' g''>4 <g' g''>4 <g' g''>4 | <c'' c'''>4 <c'' c'''>4 <c'' c'''>4 | <c''' c''''>4 <c''' c''''>8 <c''' c''''>8 <c''' c''''>8 <c''' c''''>8"
 },
@@ -39,9 +42,9 @@
         "frump_astro":"a2 fs4 | d4 r4 e4 | e2 a4 | a4 a2 | R2. | R2. | R2. | R2."
     },
     "verse2": {
-        "frump_musak":"g2 e4 | c4 r4 c4 | c2 c4 | g2 g4 | g2 g4 | g2 g4 | fs2 fs4 | fs2.",
-        "vinkle_andrew":"af4 f4 df4 | df4 df4 r4 | f2 af4 | ef2. | R2. | R2. | R2. | R2.",
-        "frump_grass":"a4 fs4 d4 | e2 e4 | e2 e4 | a2. | R2. | R2. | R2. | R2."
+        "frump_musak":"g2 e4 | c4 r4 g4 | g2 g4 | g2 g4 | d2 fs4 | fs2 fs4 | fs2 fs4 | fs2.",
+        "vinkle_andrew":"af4 f4 df4 | df4 df2| R2. | f2 af4 | ef2. | R2. | R2. | R2.",
+        "frump_grass":"a4 fs4 d4 | d2 e4 | e2 a4 | a2. | R2. | R2. | R2. | R2."
     },
     "verse3": {
         "vinkle_lights":"ef2 ef4 | gf4 r4 gf4 | ef4 r4 ef4 | gf2. | R2. | R2. | R2. | R2. | ",
