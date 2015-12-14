@@ -14,7 +14,8 @@ class SongScore(BubbleScore):
                 ("addlyrics {" 
                     + FRUMP_LYRICS["verse1"] 
                     + FRUMP_LYRICS["chorus"] 
-                    # + FRUMP_LYRICS["verse2"] 
+                    + FRUMP_LYRICS["verse2"] 
+                    + FRUMP_LYRICS["chorus"]   
                     # + FRUMP_LYRICS["verse3"] 
                     # + FRUMP_LYRICS["chorus"] 
                     + "} ", "after"),
@@ -26,7 +27,8 @@ class SongScore(BubbleScore):
                 ("addlyrics {" 
                     + VINKLE_LYRICS["verse1"] 
                     + VINKLE_LYRICS["chorus"] 
-                    # + VINKLE_LYRICS["verse2"] 
+                    + VINKLE_LYRICS["verse2"] 
+                    + VINKLE_LYRICS["chorus"]
                     # + VINKLE_LYRICS["verse3"] 
                     # + VINKLE_LYRICS["chorus"] 
                     + "} ", "after"),
