@@ -81,9 +81,19 @@ class Chorus(GridSequence, Song):
 
 # ------------------------------------------------------------------------------------------
 # INTRO
-class Intro(Chorus):
-    frump = rest_phrase * 3
-    vinkle = rest_phrase * 3
+class IntroIntro(SongPhrase):
+    piano1 = Line("<e g c'>2.( \\p | <e' g' c''>) | <fs a d'>( | <fs' a' d''>) | <e g c'>( | <e' g' c''>) | <fs a d'>( | <fs' a' d''>) ")
+    piano2 = Line("c2. ~ | c2. | d2. ~ | d2. | c2. | c4 c c | <d, a, d>4 d d | <d, a, d> <d, a, d> <d, a, d>")
+
+class Intro(SongPhrase):
+    piano1 = Line("""
+        e'8( g' c'' e'' g''4) | r4 <c'' e'' g''> <c'' e'' g''> | ef'8( g' bf' ef'' g''4) | r4 <bf' ef'' g''>8 <bf' ef'' g''>8 <bf' ef'' g''>4 |
+        a''8( f'' c'' a' c'' f'') | c'''( g'' e'' c'' e'' g'' | c''' g'' e'' c'' g'4) | <f' g' b'>2. -> |
+        """)
+    piano2 = Line("""
+        <c, c>4 <c, c> <c, c> |  <c, c>4 <c, c> <c, c> | <ef, bf,> <ef, bf,> <ef, bf,> | <ef, bf,> <ef, bf,> <ef, bf,> |
+        <a, f> <a, f> <a, f> | <g, c g> <g, c g> <g, c g> | <g, c g> <g, c g> <g, c g> | <g,, d, g,>2. -> |
+        """)
 
 # ------------------------------------------------------------------------------------------
 # VERSE 1
@@ -100,10 +110,17 @@ class HugePhrase(SongPhrase):
     piano1 = Tr(BubbleMaterial("park.piano.lick_a"), 1) + BubbleMaterial("park.piano.lick_b2")
     piano2 = Tr(BubbleMaterial("park.piano.bass_walkup_a"), 1) + BubbleMaterial("park.piano.bass_walkup_b2")
 
+class PianoLickA3(Line): 
+    music = BubbleMaterial("park.piano.lick_a3")
+    def after_music(self, music, **kwargs):
+        super().after_music(music, **kwargs)
+        arpeggio = indicatortools.Arpeggio()
+        attach(arpeggio, music[0])
+
 class AstroPhrase(SongPhrase):
     frump = BubbleMaterial("park.verse1.frump_astro")
-    piano1 = Tr(PianoWalkUp.piano1, 2)
-    piano2 = Tr(PianoWalkUp.piano2, 2)
+    piano1 = PianoLickA3() + Tr(BubbleMaterial("park.piano.lick_b"), -5)
+    piano2 = BubbleMaterial("park.piano.bass_walkup_a3")+ Tr(BubbleMaterial("park.piano.bass_walkup_b"), -5)
 
 class Verse1(GridSequence, Song):
     grid_sequence = (LarkPhrase, HugePhrase, AstroPhrase)
@@ -149,10 +166,14 @@ class Verse3(GridSequence, Song):
 
 class SongMusic(GridSequence, Song):
     grid_sequence = (SongStart, 
-        # Intro,
+        IntroIntro,
+        Intro,
         Verse1, 
-        # Chorus,
-        # Verse2, 
+        Chorus,
+        Intro,
+        Verse2, 
+        Chorus,
+        Intro,
         # Verse3,
         # Chorus
         )

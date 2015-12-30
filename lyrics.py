@@ -11,7 +11,7 @@ FRUMP_LYRICS = {
 
     "verse1": """ 
         What a lark
-        Fun and games from dawn past dark
+        Fun and games from dawn till dark
 
         As -- tro -- turf in all di -- rec -- tions        
     """,
