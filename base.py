@@ -6,7 +6,10 @@ from lyrics import FRUMP_LYRICS, VINKLE_LYRICS
 # ------------------------------------------------------------------------------------------
 # BASE SCORE, PARTS, AND PHRASES
 
-class SongScore(BubbleScore):
+class SongScore(BubbleScoreLetter):
+    hide_empty = True
+    title = "Narcissapark"
+
     piano = BubblePiano()
     frump = BubbleStaff(
             instrument=instrumenttools.BaritoneVoice(instrument_name="Frump", short_instrument_name="F."), clef="bass",
@@ -16,8 +19,8 @@ class SongScore(BubbleScore):
                     + FRUMP_LYRICS["chorus"] 
                     + FRUMP_LYRICS["verse2"] 
                     + FRUMP_LYRICS["chorus"]   
-                    # + FRUMP_LYRICS["verse3"] 
-                    # + FRUMP_LYRICS["chorus"] 
+                    + FRUMP_LYRICS["verse3"] 
+                    + FRUMP_LYRICS["chorus"] 
                     + "} ", "after"),
                 )
             )
@@ -29,12 +32,17 @@ class SongScore(BubbleScore):
                     + VINKLE_LYRICS["chorus"] 
                     + VINKLE_LYRICS["verse2"] 
                     + VINKLE_LYRICS["chorus"]
-                    # + VINKLE_LYRICS["verse3"] 
-                    # + VINKLE_LYRICS["chorus"] 
+                    + VINKLE_LYRICS["verse3"] 
+                    + VINKLE_LYRICS["chorus"] 
                     + "} ", "after"),
                 )
             )
     sequence = ("frump","vinkle","piano")
+
+    def after_music(self, music, **kwargs):
+        super().after_music(music, **kwargs)
+        tempo = Tempo(Duration(1, 4), 176)
+        attach(tempo, music[0]) 
 
 class Song(Bubble):
     piano1 = Placeholder()
