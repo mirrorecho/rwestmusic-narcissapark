@@ -26,83 +26,132 @@ piano1_every = Line("<c' c''>4")*3
 piano2_every = Line("<af, ef af>4")*3
 
 piano1_chord = Line("<c ef af>2.")
+
+class LineRoll(Line):
+    transpose=0
+
+    def music(self, **kwargs):
+        return Line("<af c' ef' af'>2.").music(**kwargs)
+
+    def after_music(self, music, **kwargs):
+        super().after_music(music, **kwargs)
+        arpeggio = indicatortools.Arpeggio()
+        attach(arpeggio, music[0])
+        mutate(music).transpose(self.transpose)
+
 piano1_big_chord = Line("<c, e g c>2.")
 
 class PianoDown2(MultiLine):
     voice1 = piano1_chord
-    voice2 = Line("<af,, af,>2. ~ <af,, af,>2. ~ <af,, af,>2. ~ <af,, af,>2.")
+    voice2 = Line("<af,, af,>2._( s2. s2. s2._)")
 
 class PianoDown2Short(MultiLine):
-    voice1 = piano1_chord
-    voice2 = Line("<af,, af,>2. ~ <af,, af,>2.")
+    voice1 = Line("<d f bf>2. | <bf, d f>2. ")
+    voice2 = Line("<bf,, bf,>2._( s2._) ")
 
-piano_down1 = Line("s2.") + Tr(piano1_chord, 12) + Tr(piano1_chord, 24) + Tr(piano1_chord, 36) 
-piano_down1_short = Line("s2.") + Tr(piano1_chord, 12)
+piano_down1 = Line("s2.") + LineRoll() + LineRoll(transpose=12) + LineRoll(transpose=24)
+piano_down1_short = Line("s2.") + LineRoll(transpose=2)
+piano_down1_short_b = Line("s2.") + LineRoll(transpose=4)
 
-def piano_up4(music):
-    return music + Tr(music, 12) + Tr(music, 24) + Tr(music, 36)
+class PianoDown2Play(PianoDown2):
+    voice1 = piano1_chord + Line("c2.( ~ <af, c ef>2. ~ <af, c ef>2.)")
 
+class PianoDown2PlayB(PianoDown2):
+    voice1 = Tr(piano1_chord,2) + Line("r4 d2( ~ <bf, d f>2. ~ <bf, d f>2.)")
+    voice2 = Tr(PianoDown2.voice2, 2)
+
+class PianoDown2Night(PianoDown2):
+    voice1 = piano1_chord + Line("s2. c2.( ~ <af, c ef>2.)")
+    voice2 = Line("<af,, af,>2. ~ <af,, af,>2. _( s2. s2._)")
+
+class PianoDown2Narcissa(MultiLine):
+    voice1 = Line("s2. | r4 r <e g> ~ | <e g>2. | <c e g>2.")
+    voice2 = Line("<c,, c,>2. ~ <c,, c,>2. _( s2. s2._)")
 
 # ------------------------------------------------------------------------------------------
 # CHORUS
 class PlayPhrase(SongPhrase):
     frump = BubbleMaterial("park.chorus.play.frump")
     vinkle = BubbleMaterial("park.chorus.play.vinkle")
-    piano1 = (piano_down1 + Tr(piano_down1, 2)).latch(dynamic="p")
-    piano2 = PianoDown2() + Tr(PianoDown2(), 2)
+    piano1 = (piano_down1 + Line("")).latch(dynamic="p", instruction="exuberantly") + Tr(piano_down1, 2) + Line("")
+    piano2 = PianoDown2Play() + PianoDown2PlayB()
 
 class NightDayPhrase(SongPhrase):
     frump = BubbleMaterial("park.chorus.night_day.frump")
     vinkle = BubbleMaterial("park.chorus.night_day.vinkle")
-    piano1 = (piano_down1 + Tr(piano_down1_short, 2) + Tr(piano_down1_short, 4)).latch(dynamic="mp")
-    piano2 = PianoDown2() + Tr(PianoDown2Short(), 2) + Tr(PianoDown2Short(), 4)
+    piano1 = (piano_down1 + Line("") ).latch(dynamic="mp") + piano_down1_short + piano_down1_short_b
+    piano2 = PianoDown2Night() + PianoDown2Short().latch(instruction="cresc.") + Tr(PianoDown2Short(), 2)
 
 class NarcissaPhrase(SongPhrase):
     frump = BubbleMaterial("park.chorus.narcissa.frump")
     vinkle = BubbleMaterial("park.chorus.narcissa.vinkle")
-    piano1 = Tr(piano_down1, 4) + Line("<d' g' b'>2. <d'' g'' b''>2. <d' fs' a'>2. <d'' fs'' a''>2.")
-    piano2 = Tr(PianoDown2(), 4) + Line("<d, d>2.-> <d, d>2.-> <d, d>2.-> <d, d>2.->")
+    piano1 = LineRoll(transpose=-8) + LineRoll(transpose=4) + LineRoll(transpose=16) + LineRoll(transpose=28) + Line("<d' g' b' d''>2.\\mf\\< <d'' g'' b'' d'''>2. <d' fs' a' d''>2. <d'' fs'' a'' d'''>2.\\!")
+    piano2 = PianoDown2Narcissa() + Line("<d, d>4 <d, d> <d, d> | <d, d>4 <d, d> <d, d> | <d, d>4 <d, d> <d, d> | <d, d>4 <d, d> <d, d> | ")
 
 class NarcissaPhrase2(SongPhrase):
     frump = BubbleMaterial("park.chorus.narcissa2.frump")
     vinkle = BubbleMaterial("park.chorus.narcissa2.vinkle")
-    piano1 = Line("""<e' g' b' e''>2.-> <e'' g'' b'' e'''>2.->
-            <f' a' c'' f''>2.-> <f'' a'' c''' f'''>2.->
-            <g' c'' e''>2.-> <g'' b'' d''' g'''>2.->
-            <c''' e''' g''' c''''>2.-> ~ <c''' e''' g''' c''''>2.
-            """)
-    piano2 = Line("""<e, e>2.-> <e, e>2.-> 
-            <f, f>2.-> <f, f>2.->
-            <g, g>2.-> <g, g>2.->
-            <c, c>2.-> ~ <c, c>2.""")
+    piano1 = Line("""<e' g' b' e''>4->\\f <e' g' b' e''>4 <e' g' b' e''>4 | <e'' g'' b'' e'''>2.->
+            <f' a' c'' f''>4-> <f' a' c'' f''> <f' a' c'' f''> | <f'' a'' c''' f'''>2.->
+            <c' e' g' c''>4-> <c' e' g' c''> <c' e' g' c''> | <d'' f'' g'' b''>2.->
+            """)  + LineRoll(transpose=28).latch(dynamic="ff") + Line("R2.")
+    piano2 = Line("""<e, e>4-> <e, e>-> <e, e>-> | <e, e>-> <e, e>-> <e, e>-> |
+            <f, f>-> <f, f>-> <f, f>-> | <f, f>-> <f, f>-> <f, f>-> |
+            <g, g>-> <g, g>-> <g, g>-> | <g,, g,>2.->  |
+            <c,, g,, c,>2.-> ~ | <c,, g,, c,>2.
+            """) 
 
 class Chorus(GridSequence, Song):
     grid_sequence = (PlayPhrase, NightDayPhrase, NarcissaPhrase, NarcissaPhrase2)
 
+class ChorusFinal(NarcissaPhrase):
+    frump = rest_phrase
+    vinkle = rest_phrase
+
+class ChorusFinalFinal(NarcissaPhrase2):
+    frump = rest_phrase
+    vinkle = rest_phrase
+
 # ------------------------------------------------------------------------------------------
 # INTRO
 class IntroIntro(SongPhrase):
-    piano1 = Line("<e g c'>2.( \\p | <e' g' c''>) | <fs a d'>( | <fs' a' d''>) | <e g c'>( | <e' g' c''>) | <fs a d'>( | <fs' a' d''>) ")
-    piano2 = Line("c2. ~ | c2. | d2. ~ | d2. | c2. | c4 c c | <d, a, d>4 d d | <d, a, d> <d, a, d> <d, a, d>")
+    piano1 = Line("""<e g c'>2.( \\p ^"exuberantly" | <e' g' c''>) | <fs a d'>(\\< | <fs' a' d''>) | 
+                    <c e g c'>( | <c' e' g' c''>) | <d fs a d'>( | <d' fs' a' d''>)\\! """)
+    piano2 = Line("c2. ~ | c2. | d2. ~ | d2. | c,2. ~ | c,2. | d,2. ~ | d,2. | ")
 
 class Intro(SongPhrase):
     piano1 = Line("""
-        e'8( g' c'' e'' g''4) | r4 <c'' e'' g''> <c'' e'' g''> | ef'8( g' bf' ef'' g''4) | r4 <bf' ef'' g''>8 <bf' ef'' g''>8 <bf' ef'' g''>4 |
-        a''8( f'' c'' a' c'' f'') | c'''( g'' e'' c'' e'' g'' | c''' g'' e'' c'' g'4) | <f' g' b'>2. -> |
+        e'8(\\mf\\< g' c'' e'' g''4) | r4 <c'' e'' g'' c'''> <c'' e'' g'' c'''> | 
+        ef'8( g' bf' ef'' g''4) | r4 <ef'' g'' bf'' ef'''>8 <ef'' g'' bf'' ef'''>8 <ef'' g'' bf'' ef'''>4 |
+        f'''8(\\!\\f c''' a'' f'' a'' c''') | f'''8( c''' a'' f'' a'' c''') | 
+        c'''( g'' e'' c'' g'4) | <f' g' b'>2. -> |
         """)
     piano2 = Line("""
-        <c, c>4 <c, c> <c, c> |  <c, c>4 <c, c> <c, c> | <ef, bf,> <ef, bf,> <ef, bf,> | <ef, bf,> <ef, bf,> <ef, bf,> |
-        <a, f> <a, f> <a, f> | <g, c g> <g, c g> <g, c g> | <g, c g> <g, c g> <g, c g> | <g,, d, g,>2. -> |
+        <c, g, c>4 <c, g, c> <c, g, c> |  <c, g, c>4 <c, g, c> <c, g, c> | 
+        <ef, bf, ef> <ef, bf, ef> <ef, bf, ef> | <ef, bf, ef> <ef, bf, ef> <ef, bf, ef> |
+        <f, c f> <f, c f> <f, c f> | <f, c f> <f, c f> <f, c f> | 
+        <g, g> <g, g> <g, g> | <g,, g,>2. -> |
         """)
+
+class IntroMinor(SongPhrase):
+    piano1 = Line("""
+        e'8(\\mf\\< g' c'' e'' g''4) | r4 <c'' e'' g'' c'''> <c'' e'' g'' c'''> | 
+        ef'8( g' bf' ef'' g''4) | r4 <ef'' g'' bf'' ef'''>8 <ef'' g'' bf'' ef'''>8 <ef'' g'' bf'' ef'''>4 |
+        f'''8(\\!\\f c''' af'' f'' af'' c''') | f'''8( c''' af'' f'' af'' c''') | 
+        c'''( g'' ef'' c'' g'4) | <f' af' b'>2. -> |
+        """)
+    piano2 = Intro.piano2
 
 # ------------------------------------------------------------------------------------------
 # VERSE 1
 
-class PianoWalkUp(SongPhrase):
-    piano1 = BubbleMaterial("park.piano.lick_a") + BubbleMaterial("park.piano.lick_b")
-    piano2 = BubbleMaterial("park.piano.bass_walkup_a") + BubbleMaterial("park.piano.bass_walkup_b")
+class Piano1StartVerse(Line):
+    music = BubbleMaterial("park.piano.lick_a") + BubbleMaterial("park.piano.lick_b")
+    instruction="lightly"
 
-class LarkPhrase(PianoWalkUp):
+class LarkPhrase(SongPhrase):
+    piano1 = Piano1StartVerse()
+    piano2 = BubbleMaterial("park.piano.bass_walkup_a") + BubbleMaterial("park.piano.bass_walkup_b")
     frump = BubbleMaterial("park.verse1.frump_lark")
 
 class HugePhrase(SongPhrase):
@@ -132,7 +181,13 @@ class Verse1(GridSequence, Song):
 class MusakPhrase(LarkPhrase):
     frump = BubbleMaterial("park.verse2.frump_musak")
 
+weber_glass1 = (Line("<c'' c'''>8---> r <ef' ef''>---> r <bf' bf''>---> r <ef' ef''>---> r af'--->[ bf'--->] c''--->[ df''--->] <bf' bf''>---> r <ef'' ef'''>---> r ") * 6).latch(dynamic="mf") + Line("r2.\\fermata")
+weber_glass2 = Line("R2. R2. R2. R2. R2. R2. R2. R2. ") + Line("<af, ef af>8---> <af, ef af>---> r <af, ef af>---> r <af, ef af>--->")*8 + Line("r2.\\fermata")
+
 class AndrewPhrase(HugePhrase):
+    frump = rest_phrase + rest_phrase + Line("R2. | R2. | R2. | R2. | r2.\\fermata | R2. | R2. | R2. | R2. | ")
+    piano1 = Tr(BubbleMaterial("park.piano.lick_a"), 1) + weber_glass1 + BubbleMaterial("park.piano.lick_b2")
+    piano2 = Tr(BubbleMaterial("park.piano.bass_walkup_a"), 1) + weber_glass2 +  BubbleMaterial("park.piano.bass_walkup_b2")
     vinkle = BubbleMaterial("park.verse2.vinkle_andrew")
 
 class GrassPhrase(AstroPhrase):
@@ -143,17 +198,39 @@ class Verse2(GridSequence, Song):
 
 # ------------------------------------------------------------------------------------------
 # VERSE 3
-class LightsPhrase(LarkPhrase):
+piano_lights_a1 = Line("<ef g c'>4\p <ef g c'> <ef g c'> | <ef g c'>( <ef' g' c''>2) |")
+piano_lights_b1 = Line("""<d a c'>4( <f' f''>  <a' d'' f''> ~ |
+                    <a' d'' f''>) <e' b'>( <e'' b''> ~ |
+                    <e'' b''>) <b' e'' g''>\\< <b' e'' g''> ~ |
+                    <b' e'' g''> <cs''! a''>( <a' ds''!>) |
+                    <gs'! e''>( e' cs') |
+                    <gs bs>\\!\\mf <gs bs> <fs ds'> |""")
+piano_lights_a2 = Line("<c,, c,>2. ~ | <c,, c,>2.")
+piano_lights_b2 = Line("""<c, c>2. | <g,, g,>2. ~ | 
+                    <g,, g,>2. | <fs,, fs,>2. | <gs,,! gs,!>2. ~ | <gs,, gs,>2. | """)
+
+piano_lights_c1 = Line("""<e b d'>2 <fs cs'>4  |
+                    <gs b>( <g bf>) g |
+                    g2. |
+                    g8( bf df' e' g' bf' |
+                    df'' e'' g'' bf'' df''' e''' |
+                    g'''2.) |""")
+piano_lights_c2 = Line("<d, d>2( a,4) | <ef, ef>2. | df2. | df,4 df, df, | df, df, df, | df,2. |")
+
+class LightsPhrase(SongPhrase):
+    piano1 = piano_lights_a1 + piano_lights_b1
+    piano2 = piano_lights_a2 + piano_lights_b2
     vinkle = BubbleMaterial("park.verse3.vinkle_lights")
-    frump = rest_phrase
 
-class DronesPhrase(HugePhrase):
+class DronesPhrase(SongPhrase):
+    piano1 = Tr(piano_lights_a1, "+M1") + Tr(piano_lights_b1, "+m2")
+    piano2 = Tr(piano_lights_a2, "+M1") + Tr(piano_lights_b2, "+m2")
     frump = BubbleMaterial("park.verse3.frump_drones")
-    vinkle = rest_phrase
 
-class BurnhamPhrase(AstroPhrase):
+class BurnhamPhrase(SongPhrase):
+    piano1 = Tr(piano_lights_a1, "+M2") + piano_lights_c1
+    piano2 = Tr(piano_lights_a2, "+M2") + piano_lights_c2
     vinkle = BubbleMaterial("park.verse3.vinkle_burnham")
-    frump = rest_phrase
 
 class Verse3(GridSequence, Song):
     grid_sequence = (LightsPhrase, DronesPhrase, BurnhamPhrase)
@@ -173,12 +250,16 @@ class SongMusic(GridSequence, Song):
         Intro,
         Verse2, 
         Chorus,
-        Intro,
-        # Verse3,
-        # Chorus
+        IntroMinor,
+        Verse3,
+        Chorus,
+        ChorusFinal,
+        ChorusFinalFinal,
         )
 
 score = SongScore( SongMusic() )
+score.play()
+# score.save()
 score.make_pdf()
 # print(score)
 # score.show()

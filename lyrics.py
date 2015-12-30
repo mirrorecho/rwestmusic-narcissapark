@@ -37,7 +37,7 @@ VINKLE_LYRICS =  {
         Huge re -- flec -- tions
     """,
     "verse2": """
-        And -- rew Loyd We -- ber, Phil -- ip Glass
+        And -- rew We -- ber, Phil -- ip Glass
     """,
     "verse3":"""
         Lights that flash and search the sky
